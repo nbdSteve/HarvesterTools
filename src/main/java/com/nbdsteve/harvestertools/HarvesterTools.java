@@ -1,5 +1,9 @@
 package com.nbdsteve.harvestertools;
 
+import com.nbdsteve.harvestertools.command.HarvesterCommand;
+import com.nbdsteve.harvestertools.event.BlockBreak;
+import com.nbdsteve.harvestertools.event.ModeChange;
+import com.nbdsteve.harvestertools.event.gui.GuiClick;
 import com.nbdsteve.harvestertools.file.LoadProvidedFiles;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
@@ -23,6 +27,15 @@ public final class HarvesterTools extends JavaPlugin {
         //Generate all of the provided files for the plugin
         this.lpf = new LoadProvidedFiles();
         this.cb = new CollateBlocks();
+        //Collate the block prices for the plugin
+        cb.calculateBlocks();
+        //Register the commands for the plugin
+        getCommand("harvest").setExecutor(new HarvesterCommand(this));
+        getCommand("h").setExecutor(new HarvesterCommand(this));
+        //Register the events for the plugin
+        getServer().getPluginManager().registerEvents(new GuiClick(), this);
+        getServer().getPluginManager().registerEvents(new BlockBreak(), this);
+        getServer().getPluginManager().registerEvents(new ModeChange(), this);
     }
 
     @Override

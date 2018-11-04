@@ -4,6 +4,7 @@ import com.nbdsteve.harvestertools.HarvesterTools;
 import com.nbdsteve.harvestertools.file.LoadProvidedFiles;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -18,6 +19,7 @@ public class ModeChange implements Listener {
     //Register the provided files instance
     private LoadProvidedFiles lpf = ((HarvesterTools) pl).getFiles();
 
+    @EventHandler
     public void onClick(PlayerInteractEvent e) {
         if (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
             //Get the player
@@ -50,7 +52,7 @@ public class ModeChange implements Listener {
                     //Store the strings for the mode that are provided in the harvester.yml
                     String mode = ChatColor.translateAlternateColorCodes('&', lpf.getHarvester().getString(toolType + ".mode-unique-id"));
                     String sell = ChatColor.translateAlternateColorCodes('&', lpf.getHarvester().getString(toolType + ".sell-mode"));
-                    String harvest = ChatColor.translateAlternateColorCodes('&', lpf.getHarvester().getString(toolType + ".sell-mode"));
+                    String harvest = ChatColor.translateAlternateColorCodes('&', lpf.getHarvester().getString(toolType + ".harvest-mode"));
                     /*
                      * Check to see if the lore contains the unique mode id. If it does then get the line that it is on,
                      * then reset the line with the unique mode id + the opposing mode (sell or harvest).
@@ -67,7 +69,7 @@ public class ModeChange implements Listener {
                                 for (String m : lpf.getMessages().getStringList("change-to-sell-mode")) {
                                     p.sendMessage(ChatColor.translateAlternateColorCodes('&', m));
                                 }
-                            } else if (toolLore.contains(sell)) {
+                            } else if (currentMode.contains(sell)) {
                                 //Changing the line of our lore
                                 toolLore.set(i, (mode + " " + harvest));
                                 toolMeta.setLore(toolLore);

@@ -5,9 +5,11 @@ import com.nbdsteve.harvestertools.HarvesterTools;
 import com.nbdsteve.harvestertools.file.LoadProvidedFiles;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
@@ -17,6 +19,7 @@ import org.bukkit.plugin.Plugin;
 import java.util.List;
 
 import static org.bukkit.Material.CACTUS;
+import static org.bukkit.Material.LEGACY_SUGAR_CANE_BLOCK;
 import static org.bukkit.Material.SUGAR_CANE;
 
 public class BlockBreak implements Listener {
@@ -29,6 +32,7 @@ public class BlockBreak implements Listener {
     //Get the server economy
     Economy econ = HarvesterTools.getEconomy();
 
+    @EventHandler
     public void onBreak(BlockBreakEvent e) {
         //Get the player
         Player p = e.getPlayer();
@@ -62,52 +66,55 @@ public class BlockBreak implements Listener {
                 //Store the strings for the mode that are provided in the harvester.yml
                 String mode = ChatColor.translateAlternateColorCodes('&', lpf.getHarvester().getString(toolType + ".mode-unique-id"));
                 String sell = ChatColor.translateAlternateColorCodes('&', lpf.getHarvester().getString(toolType + ".sell-mode"));
-                String harvest = ChatColor.translateAlternateColorCodes('&', lpf.getHarvester().getString(toolType + ".sell-mode"));
+                String harvest = ChatColor.translateAlternateColorCodes('&', lpf.getHarvester().getString(toolType + ".harvest-mode"));
                 /*
                  * Check to see if the lore contains the unique mode id. If it does then get the line that it is on,
-                 * then reset the line with the unique mode id + the opposing mode (sell or harvest).
+                 * then set the selling boolean to true or false.
                  */
                 for (int i = 0; i < toolMeta.getLore().size(); i++) {
                     String currentMode = toolMeta.getLore().get(i);
                     if (currentMode.contains(mode)) {
                         if (currentMode.contains(harvest)) {
                             isSelling = false;
-                        } else if (toolLore.contains(sell)) {
+                        } else if (currentMode.contains(sell)) {
                             isSelling = true;
                         }
                     }
                 }
-                if (cb.getBlockList().containsKey(e.getBlock())) {
+                if (cb.getBlockList().containsKey(e.getBlock().getType().toString())) {
+                    e.setCancelled(true);
                     //Store the price of the block
-                    double price = (double) cb.getBlockList().get(e.getBlock());
-                    if (e.getBlock().getType() == SUGAR_CANE) {
+                    double price = (double) cb.getBlockList().get(e.getBlock().getType().toString());
+                    //The sugar cane is so fucking stupid with the new spigot API, it needs to be like this otherwise it wont work properly
+                    if (e.getBlock().getType().toString().equalsIgnoreCase("SUGAR_CANE_BLOCK") ||
+                            e.getBlock().getType().equals(Material.SUGAR_CANE)) {
+                        //For the blocks that break from the bottom need to check above for more blocks and break those
                         for (int i = 3; i >= 0; i--) {
                             Block check = e.getBlock().getRelative(0, i, 0);
-                            if (check.getType() == SUGAR_CANE) {
+                            if (check.getType().toString().equalsIgnoreCase("SUGAR_CANE_BLOCK") ||
+                                    e.getBlock().getType().equals(Material.SUGAR_CANE)) {
+                                check.getDrops().clear();
                                 check.setType(Material.AIR);
                                 if (isSelling) {
                                     econ.depositPlayer(p, price);
-                                    if (lpf.getHarvester().getBoolean("enable-sell-messages")) {
-                                        for (String m : lpf.getMessages().getStringList("sell")) {
-                                            p.sendMessage(ChatColor.translateAlternateColorCodes('&', m).replace("%price%", String.valueOf(price)));
-                                        }
+                                    for (String m : lpf.getMessages().getStringList("sell")) {
+                                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', m).replace("%price%", String.valueOf(price)));
                                     }
                                 } else {
-                                    p.getInventory().addItem(new ItemStack(SUGAR_CANE));
+                                    p.getInventory().addItem(new ItemStack(Material.SUGAR_CANE));
                                 }
                             }
                         }
-                    } else if (e.getBlock().getType() == CACTUS) {
+                    } else if (e.getBlock().getType().equals(Material.CACTUS)) {
                         for (int i = 3; i >= 0; i--) {
                             Block check = e.getBlock().getRelative(0, i, 0);
-                            if (check.getType() == CACTUS) {
+                            if (check.getType().equals(Material.CACTUS)) {
+                                check.getDrops().clear();
                                 check.setType(Material.AIR);
                                 if (isSelling) {
                                     econ.depositPlayer(p, price);
-                                    if (lpf.getHarvester().getBoolean("enable-sell-messages")) {
-                                        for (String m : lpf.getMessages().getStringList("sell")) {
-                                            p.sendMessage(ChatColor.translateAlternateColorCodes('&', m).replace("%price%", String.valueOf(price)));
-                                        }
+                                    for (String m : lpf.getMessages().getStringList("sell")) {
+                                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', m).replace("%price%", String.valueOf(price)));
                                     }
                                 } else {
                                     p.getInventory().addItem(new ItemStack(CACTUS));
@@ -118,10 +125,8 @@ public class BlockBreak implements Listener {
                         if (isSelling) {
                             e.getBlock().getDrops().clear();
                             econ.depositPlayer(p, price);
-                            if (lpf.getHarvester().getBoolean("enable-sell-messages")) {
-                                for (String m : lpf.getMessages().getStringList("sell")) {
-                                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', m).replace("%price%", String.valueOf(price)));
-                                }
+                            for (String m : lpf.getMessages().getStringList("sell")) {
+                                p.sendMessage(ChatColor.translateAlternateColorCodes('&', m).replace("%price%", String.valueOf(price)));
                             }
                         } else {
                             for (ItemStack item : e.getBlock().getDrops()) {

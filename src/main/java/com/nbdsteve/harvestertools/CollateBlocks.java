@@ -16,7 +16,7 @@ public class CollateBlocks {
     public void calculateBlocks() {
         blockList = new HashMap<>();
         double price = 0;
-        for(String m : lpf.getSell().getStringList("block-prices")) {
+        for(String m : lpf.getSell().getStringList("blocks")) {
             String[] parts = m.split("-");
             try {
                 price = Double.parseDouble(parts[1]);
@@ -25,6 +25,7 @@ public class CollateBlocks {
                         ("In the sell.yml you have an invalid price for the block: " + parts[0] + "! Make sure the price is a valid double.");
             }
             blockList.put(parts[0].toUpperCase(), price);
+//            pl.getLogger().info(parts[0].toUpperCase() + " " + String.valueOf(price));
         }
         pl.getLogger().info("Calculating all block prices...");
     }
