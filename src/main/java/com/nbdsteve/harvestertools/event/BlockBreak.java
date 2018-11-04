@@ -42,22 +42,28 @@ public class BlockBreak implements Listener {
                 ItemMeta toolMeta = p.getInventory().getItemInHand().getItemMeta();
                 List<String> toolLore = toolMeta.getLore();
                 String toolType;
+                String level;
                 //Get the level of harvester from the tool lore
                 if (toolLore.contains(
                         ChatColor.translateAlternateColorCodes('&', lpf.getHarvester().getString("harvester-tool-1.unique")))) {
                     toolType = "harvester-tool-1";
+                    level = "1";
                 } else if (toolLore.contains(
                         ChatColor.translateAlternateColorCodes('&', lpf.getHarvester().getString("harvester-tool-2.unique")))) {
                     toolType = "harvester-tool-2";
+                    level = "2";
                 } else if (toolLore.contains(
                         ChatColor.translateAlternateColorCodes('&', lpf.getHarvester().getString("harvester-tool-3.unique")))) {
                     toolType = "harvester-tool-3";
+                    level = "3";
                 } else if (toolLore.contains(
                         ChatColor.translateAlternateColorCodes('&', lpf.getHarvester().getString("harvester-tool-4.unique")))) {
                     toolType = "harvester-tool-4";
+                    level = "4";
                 } else if (toolLore.contains(
                         ChatColor.translateAlternateColorCodes('&', lpf.getHarvester().getString("harvester-tool-5.unique")))) {
                     toolType = "harvester-tool-5";
+                    level = "5";
                 } else {
                     return;
                 }
@@ -81,15 +87,15 @@ public class BlockBreak implements Listener {
                         }
                     }
                 }
-                if (cb.getBlockList().containsKey(e.getBlock().getType().toString())) {
+                if (cb.getBlockList(level).containsKey(e.getBlock().getType().toString())) {
                     e.setCancelled(true);
                     //Store the price of the block
-                    double price = (double) cb.getBlockList().get(e.getBlock().getType().toString());
+                    double price = (double) cb.getBlockList(level).get(e.getBlock().getType().toString());
                     //The sugar cane is so fucking stupid with the new spigot API, it needs to be like this otherwise it wont work properly
                     if (e.getBlock().getType().toString().equalsIgnoreCase("SUGAR_CANE_BLOCK") ||
                             e.getBlock().getType().equals(Material.SUGAR_CANE)) {
                         //For the blocks that break from the bottom need to check above for more blocks and break those
-                        for (int i = 3; i >= 0; i--) {
+                        for (int i = 4; i >= 0; i--) {
                             Block check = e.getBlock().getRelative(0, i, 0);
                             if (check.getType().toString().equalsIgnoreCase("SUGAR_CANE_BLOCK") ||
                                     e.getBlock().getType().equals(Material.SUGAR_CANE)) {
@@ -106,7 +112,7 @@ public class BlockBreak implements Listener {
                             }
                         }
                     } else if (e.getBlock().getType().equals(Material.CACTUS)) {
-                        for (int i = 3; i >= 0; i--) {
+                        for (int i = 4; i >= 0; i--) {
                             Block check = e.getBlock().getRelative(0, i, 0);
                             if (check.getType().equals(Material.CACTUS)) {
                                 check.getDrops().clear();

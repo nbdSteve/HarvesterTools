@@ -17,7 +17,7 @@ public class LoadProvidedFiles {
      * Enum to store each file, this is public so we can call methods on these
      */
     public enum Files {
-        CONFIG, MESSAGES, HARVESTER, SELL
+        CONFIG, MESSAGES, HARVESTER, BLOCKS
     }
 
     /**
@@ -28,7 +28,7 @@ public class LoadProvidedFiles {
         fileList.put(Files.CONFIG, new GenerateProvidedFile("config.yml"));
         fileList.put(Files.MESSAGES, new GenerateProvidedFile("messages.yml"));
         fileList.put(Files.HARVESTER, new GenerateProvidedFile("harvester.yml"));
-        fileList.put(Files.SELL, new GenerateProvidedFile("sell.yml"));
+        fileList.put(Files.BLOCKS, new GenerateProvidedFile("blocks.yml"));
         pl.getLogger().info("Loading provided files...");
     }
 
@@ -44,8 +44,8 @@ public class LoadProvidedFiles {
         return fileList.get(Files.HARVESTER).get();
     }
 
-    public FileConfiguration getSell() {
-        return fileList.get(Files.SELL).get();
+    public FileConfiguration getBlocks() {
+        return fileList.get(Files.BLOCKS).get();
     }
 
     public void reload() {

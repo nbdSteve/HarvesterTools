@@ -6,9 +6,7 @@
 # Read My TOS Here: https://goo.gl/mtSuZo
 # Copyright Owner: nbdSteve
 #
-enable-sell-messages: true
-#
-# These are values for the GUI that will be opened with the /harvester command.
+# These are values for the GUI that will be opened with the /harvest command.
 gui:
   #
   # The name of the GUI.

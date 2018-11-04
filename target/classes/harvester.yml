@@ -1,12 +1,39 @@
+#
+# HarvesterTools v1.0-BETA
+#
+# For a price list of all the blocks please see the sell.yml
+#
+
+# -------------------------------------------------------------
+# Start configuration for harvester-tool-1
+#
 harvester-tool-1:
-  name: "&4&lHARVESTER TOOL"
+  # The name of the item given to the player with the '/harvest give' command.
+  name: "&4&lHARVESTER TOOL &7(&flevel 1&7)"
+  #
+  # IMPORTANT: Make sure this is located in the Lore section of this configuration.
+  # And make sure it is unique to the level 1 items, this will tell the plugin what it is looking for.
   unique: "&eHarvest I"
+  #
+  # IMPORTANT: make sure that the 'mode-unique-id' and the "%mode%" text are located in the same line,
+  # when the player changes mode it will change the lore like this: 'mode-unique-id + " " + harvest/sell-mode'
   mode-unique-id: "&7&lMODE:"
+  #
+  # The string displayed when the tool is in harvest mode
   harvest-mode: "&c&lHARVEST"
+  #
+  # The string displayed when the tool is in sell mode
   sell-mode: "&a&lSELL"
+  #
+  # Enchantments that will be applied to the tool with the /harvest give command
+  # IMPORTANT: make sure to use these enchantment names https://docs.oc.tc/reference/enchantments (vanilla names may not work!).
+  # Syntax: NAME-LEVEL
   enchantments:
   - DIG_SPEED-5
   - DURABILITY-3
+  #
+  # Enchantment Lore, you can make this as many lines as you would like.
+  # The mode-unique-id and %mode% can be on any line! Just make sure they are on the same line
   lore:
     - "&eHarvest I"
     - "&7 "
@@ -16,10 +43,15 @@ harvester-tool-1:
     - "&7&oselling crops and plant matter. Attack"
     - "&7&oyour greens and bathe in the profits."
     - "&7 "
+#
 
+#
+# The following configuration is for the item displayed in the GUI menu.
+# This item will not be given to the player, the harvester-tool-1 item will be given.
 harvester-tool-1-gui:
+  # If this item will be in the GUI.
   enabled: true
-  name: "&4&lHARVESTER TOOL"
+  name: "&4&lHARVESTER TOOL &7(&flevel 1&7)"
   unique: "&eHarvest I"
   enchantments:
   - DIG_SPEED-5
@@ -40,5 +72,208 @@ harvester-tool-1-gui:
   gui-item: diamond_hoe
   # The slot in the GUI that this item will be.
   gui-slot: 11
-  # The price of the TrenchTool, this will be taken from the players account.
+  # The price of the HarvesterTool, this will be taken from the players account.
   price: 1000000
+#
+# End configuration for harvester-tool-1
+# -------------------------------------------------------------
+
+# -------------------------------------------------------------
+# Start configuration for harvester-tool-2
+#
+harvester-tool-2:
+  name: "&4&lHARVESTER TOOL &7(&flevel 2&7)"
+  unique: "&eHarvest II"
+  mode-unique-id: "&7&lMODE:"
+  harvest-mode: "&c&lHARVEST"
+  sell-mode: "&a&lSELL"
+  enchantments:
+  - DIG_SPEED-5
+  - DURABILITY-3
+  lore:
+  - "&eHarvest II"
+  - "&7 "
+  - "&7&lMODE: %mode%"
+  - "&7 "
+  - "&7&oThis tool was created to stream line"
+  - "&7&oselling crops and plant matter. Attack"
+  - "&7&oyour greens and bathe in the profits."
+  - "&7 "
+#
+
+#
+harvester-tool-2-gui:
+  enabled: true
+  name: "&4&lHARVESTER TOOL &7(&flevel 2&7)"
+  unique: "&eHarvest II"
+  enchantments:
+  - DIG_SPEED-5
+  - DURABILITY-3
+  lore:
+  - "&eHarvest II"
+  - "&7 "
+  - "&7&lMODE: &c&lHARVEST"
+  - "&7 "
+  - "&7&oThis tool was created to stream line"
+  - "&7&oselling crops and plant matter. Attack"
+  - "&7&oyour greens and bathe in the profits."
+  - "&7 "
+  - "&7&m---------------------------------"
+  - "&a&lBUY PRICE: &f$2,000,000"
+  - "&7&m---------------------------------"
+  gui-item: diamond_hoe
+  gui-slot: 12
+  price: 2000000
+#
+# End configuration for harvester-tool-2
+# -------------------------------------------------------------
+
+# -------------------------------------------------------------
+# Start configuration for harvester-tool-3
+#
+harvester-tool-3:
+  name: "&4&lHARVESTER TOOL &7(&flevel 3&7)"
+  unique: "&eHarvest III"
+  mode-unique-id: "&7&lMODE:"
+  harvest-mode: "&c&lHARVEST"
+  sell-mode: "&a&lSELL"
+  enchantments:
+  - DIG_SPEED-5
+  - DURABILITY-3
+  lore:
+  - "&eHarvest III"
+  - "&7 "
+  - "&7&lMODE: %mode%"
+  - "&7 "
+  - "&7&oThis tool was created to stream line"
+  - "&7&oselling crops and plant matter. Attack"
+  - "&7&oyour greens and bathe in the profits."
+  - "&7 "
+#
+
+#
+harvester-tool-3-gui:
+  enabled: true
+  name: "&4&lHARVESTER TOOL &7(&flevel 3&7)"
+  unique: "&eHarvest III"
+  enchantments:
+  - DIG_SPEED-5
+  - DURABILITY-3
+  lore:
+  - "&eHarvest III"
+  - "&7 "
+  - "&7&lMODE: &c&lHARVEST"
+  - "&7 "
+  - "&7&oThis tool was created to stream line"
+  - "&7&oselling crops and plant matter. Attack"
+  - "&7&oyour greens and bathe in the profits."
+  - "&7 "
+  - "&7&m---------------------------------"
+  - "&a&lBUY PRICE: &f$3,000,000"
+  - "&7&m---------------------------------"
+  gui-item: diamond_hoe
+  gui-slot: 13
+  price: 3000000
+#
+# End configuration for harvester-tool-3
+# -------------------------------------------------------------
+
+# -------------------------------------------------------------
+# Start configuration for harvester-tool-4
+#
+harvester-tool-4:
+  name: "&4&lHARVESTER TOOL &7(&flevel 4&7)"
+  unique: "&eHarvest IV"
+  mode-unique-id: "&7&lMODE:"
+  harvest-mode: "&c&lHARVEST"
+  sell-mode: "&a&lSELL"
+  enchantments:
+  - DIG_SPEED-5
+  - DURABILITY-3
+  lore:
+  - "&eHarvest IV"
+  - "&7 "
+  - "&7&lMODE: %mode%"
+  - "&7 "
+  - "&7&oThis tool was created to stream line"
+  - "&7&oselling crops and plant matter. Attack"
+  - "&7&oyour greens and bathe in the profits."
+  - "&7 "
+#
+
+#
+harvester-tool-4-gui:
+  enabled: true
+  name: "&4&lHARVESTER TOOL &7(&flevel 4&7)"
+  unique: "&eHarvest IV"
+  enchantments:
+  - DIG_SPEED-5
+  - DURABILITY-3
+  lore:
+  - "&eHarvest IV"
+  - "&7 "
+  - "&7&lMODE: &c&lHARVEST"
+  - "&7 "
+  - "&7&oThis tool was created to stream line"
+  - "&7&oselling crops and plant matter. Attack"
+  - "&7&oyour greens and bathe in the profits."
+  - "&7 "
+  - "&7&m---------------------------------"
+  - "&a&lBUY PRICE: &f$4,000,000"
+  - "&7&m---------------------------------"
+  gui-item: diamond_hoe
+  gui-slot: 14
+  price: 4000000
+#
+# End configuration for harvester-tool-4
+# -------------------------------------------------------------
+
+# -------------------------------------------------------------
+# Start configuration for harvester-tool-5
+#
+harvester-tool-5:
+  name: "&4&lHARVESTER TOOL &7(&flevel 5&7)"
+  unique: "&eHarvest V"
+  mode-unique-id: "&7&lMODE:"
+  harvest-mode: "&c&lHARVEST"
+  sell-mode: "&a&lSELL"
+  enchantments:
+  - DIG_SPEED-5
+  - DURABILITY-3
+  lore:
+  - "&eHarvest V"
+  - "&7 "
+  - "&7&lMODE: %mode%"
+  - "&7 "
+  - "&7&oThis tool was created to stream line"
+  - "&7&oselling crops and plant matter. Attack"
+  - "&7&oyour greens and bathe in the profits."
+  - "&7 "
+#
+
+#
+harvester-tool-5-gui:
+  enabled: true
+  name: "&4&lHARVESTER TOOL &7(&flevel 5&7)"
+  unique: "&eHarvest V"
+  enchantments:
+  - DIG_SPEED-5
+  - DURABILITY-3
+  lore:
+  - "&eHarvest V"
+  - "&7 "
+  - "&7&lMODE: &c&lHARVEST"
+  - "&7 "
+  - "&7&oThis tool was created to stream line"
+  - "&7&oselling crops and plant matter. Attack"
+  - "&7&oyour greens and bathe in the profits."
+  - "&7 "
+  - "&7&m---------------------------------"
+  - "&a&lBUY PRICE: &f$5,000,000"
+  - "&7&m---------------------------------"
+  gui-item: diamond_hoe
+  gui-slot: 15
+  price: 5000000
+#
+# End configuration for harvester-tool-5
+# -------------------------------------------------------------
