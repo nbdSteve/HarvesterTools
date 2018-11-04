@@ -1,0 +1,3 @@
+name: HarvesterTools
+version: ${project.version}
+main: com.nbdsteve.harvestertools.HarvesterTools
