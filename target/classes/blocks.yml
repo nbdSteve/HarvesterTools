@@ -1,0 +1,11 @@
+#
+# HarvesterTools blocks.yml v1.0-BETA
+#
+# This is the list of blocks that will be sold / harvested by the plugin
+# Syntax: item-(price for tool 1)-(price for tool 2)-(price for tool 3)-(price for tool 4)-(price for tool 5)
+#
+# Make sure that you enter the correct minecraft name of an item.
+# See this link for more information about names: https://minecraft-ids.grahamedgecombe.com/
+blocks:
+  - sugar_cane_block-1-2-3-4-5
+  - cactus-1-2-3-4-5

@@ -1,6 +1,6 @@
-package com.nbdsteve.harvestertools;
+package com.nbdsteve.harvestertools.file;
 
-import com.nbdsteve.harvestertools.file.LoadProvidedFiles;
+import com.nbdsteve.harvestertools.HarvesterTools;
 import org.bukkit.plugin.Plugin;
 
 import java.util.HashMap;
@@ -51,6 +51,7 @@ public class CollateBlocks {
     }
 
     public HashMap getBlockList(String level) {
+        //This is an easy way to determine which price to use
         if (level.equalsIgnoreCase("1")) {
             return blockListTool1;
         } else if (level.equalsIgnoreCase("2"))  {

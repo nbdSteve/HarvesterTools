@@ -1,2 +1,157 @@
+#
+# HarvesterTools messages.yml v3.0
+#
+# Message sent to the player when they type the /harvester help command.
+# Requires permission: harvester.help
+help:
+- "&7 "
+- "&f&lHarvesterTools &7- &emade by &6&lnbdSteve"
+- "&7 "
+- "&3/harvest give <player> <item> <level> <amount>"
+- "&7Give the target player their item with the &d&oharvest&7 enchantment."
+- "&7The player must be online and the level must be between 1-5."
+- "&7The <item> must be a valid &e&lMINECRAFT&r &7material, e.g. &fdiamond_how&7."
+- "&7Specify an amount that is 1 or greater, if you put no amount it will not give you an item."
+- "&7Valid item entries are &e&lANY&r &7minecraft item."
+- "&7Requires premission node: &fharvester.give"
+- "&7 "
+- "&3/harvester reload"
+- "&7Reload the config.yml file."
+- "&7Requires premission node: &fharvester.reload"
+- "&7 "
+#
+
+#
+# Message sent to the player when they type the /harvester reload command.
+# Requires permission: harvester.reload
+reload:
+- "&7 "
+- "&f&lHarvesterTools:"
+- "&a&lSUCCESS!&7 You just reloaded all of the configuration files."
+- "&7 "
+#
+
+#
+# Message sent to the player when they purchase a tool from the GUI menu.
+# Requires permission: harvester.gui to view the GUI.
+purchase:
+- "&7 "
+- "&f&lHarvesterTools:"
+- "&a&lSUCCESS!&7 Your new tool has been added to your inventory! &c$%cost%&7, has been taken from your account."
+- "&7 "
+#
+
+#
+# Message sent to the player when they open the GUI with /harvester.
+# Requires permission: harvester.gui to view the GUI.
+open-gui:
+- "&7 "
+- "&f&lHarvesterTools:"
+- "&7Searching the universe for the &bHarvesterTools&7 merchant..."
+- "&7 "
+#
+
+#
+# Message sent to the player when they type an invalid command.
+# No permission required.
+invalid-command:
+- "&7 "
+- "&f&lHarvesterTools:"
+- "&c&lERROR!&7 The command you entered is &b&lINVALID&7 please see &e/harvester help&7 for command help."
+- "&7 "
+#
+
+#
+# Message sent to the player when they type a command and don't have permission.
+# No permission required.
+no-permission:
+- "&7 "
+- "&f&lHarvesterTools:"
+- "&c&lERROR!&7 You do not have permission to use that!"
+- "&7 "
+#
+
+#
+# Message sent to the player if they do not have permission to purchase the tool from the GUI.
+# No permission required.
+no-buy-permission:
+- "&7 "
+- "&f&lHarvesterTools:"
+- "&c&lERROR!&7 You do not have permission to purchase that HarvesterTool!"
+- "&7 "
+#
+
+#
+# Message sent to the player when they type a command and the player is invalid.
+# Command permission required.
+invalid-player:
+- "&7 "
+- "&f&lHarvesterTools:"
+- "&c&lERROR!&7 The player who entered is not online."
+- "&7 "
+#
+
+#
+# Message sent to the player when they type a command and the amount is invalid.
+# Command permission required.
+invalid-amount:
+- "&7 "
+- "&f&lHarvesterTools:"
+- "&c&lERROR!&7 The amount you entered is &b&lINVALID&7, make sure the amount is a positive integer greater than 0."
+- "&7 "
+#
+
+#
+# Message sent to the player when they type a command and the size of harvester is invalid.
+# Command permission required.
+invalid-level:
+- "&7 "
+- "&f&lHarvesterTools:"
+- "&c&lERROR!&7 The enchantment size you entered is &b&lINVALID&7, make sure the enchantment size is between 1 - 5."
+- "&7 "
+#
+
+#
+# Message sent to the player if they do not have enough money.
+# Requires permission: harvester.gui to view the GUI.
+insufficient-funds:
+- "&7 "
+- "&f&lHarvesterTools:"
+- "&c&lERROR!&7 You do not have enough money to buy that! You only have &c$%bal%&7 and that tool costs &c$%cost%&7."
+- "&7 "
+#
+
+#
+# Message sent to the player if they try to buy a tool and their inventory is full.
+# Requires permission: harvester.gui to view the GUI.
+inventory-full:
+- "&7 "
+- "&f&lHarvesterTools:"
+- "&c&lERROR!&7 Your inventory is full, free some space to buy the tool."
+- "&7 "
+#
+
+#
+# Message sent to the player when the are using the tool in sell mode
+# Set this to nothing for no message to be sent,
+# the %price% placeholder will be swapped with the items price.
 sell:
-  - "&a&l+ &a$%price%"
+- "&a&l+ &a$%price%"
+#
+
+#
+# Message sent to the player when their tool changes from harvest to sell mode
+change-to-sell-mode:
+- "&7 "
+- "&f&lHarvesterTools:"
+- "&7Your tool is now in &a&lSELL&7 mode."
+- "&7 "
+#
+
+#
+# Message sent to the player when their tool changes from sell to harvest mode
+change-to-harvest-mode:
+- "&7 "
+- "&f&lHarvesterTools:"
+- "&7Your tool is now in &c&lHARVEST&7 mode."
+- "&7 "

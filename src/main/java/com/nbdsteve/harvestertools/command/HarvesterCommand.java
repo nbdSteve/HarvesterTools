@@ -1,6 +1,6 @@
 package com.nbdsteve.harvestertools.command;
 
-import com.nbdsteve.harvestertools.CollateBlocks;
+import com.nbdsteve.harvestertools.file.CollateBlocks;
 import com.nbdsteve.harvestertools.HarvesterTools;
 import com.nbdsteve.harvestertools.file.LoadProvidedFiles;
 import com.nbdsteve.harvestertools.gui.HarvesterGui;

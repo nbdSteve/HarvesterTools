@@ -4,6 +4,7 @@ import com.nbdsteve.harvestertools.command.HarvesterCommand;
 import com.nbdsteve.harvestertools.event.BlockBreak;
 import com.nbdsteve.harvestertools.event.ModeChange;
 import com.nbdsteve.harvestertools.event.gui.GuiClick;
+import com.nbdsteve.harvestertools.file.CollateBlocks;
 import com.nbdsteve.harvestertools.file.LoadProvidedFiles;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;

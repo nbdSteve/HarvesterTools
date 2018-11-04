@@ -1,11 +1,14 @@
 package com.nbdsteve.harvestertools.event;
 
-import com.nbdsteve.harvestertools.CollateBlocks;
+import com.nbdsteve.harvestertools.file.CollateBlocks;
 import com.nbdsteve.harvestertools.HarvesterTools;
 import com.nbdsteve.harvestertools.file.LoadProvidedFiles;
+import com.nbdsteve.harvestertools.support.Factions;
+import com.nbdsteve.harvestertools.support.MassiveCore;
+import com.nbdsteve.harvestertools.support.WorldGuard;
 import net.milkbowl.vault.economy.Economy;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -17,10 +20,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 
 import java.util.List;
-
-import static org.bukkit.Material.CACTUS;
-import static org.bukkit.Material.LEGACY_SUGAR_CANE_BLOCK;
-import static org.bukkit.Material.SUGAR_CANE;
 
 public class BlockBreak implements Listener {
     //Register the main class
@@ -87,6 +86,30 @@ public class BlockBreak implements Listener {
                         }
                     }
                 }
+                boolean wg = false;
+                boolean fac = false;
+                //Figure out which plugins are being used and what to support
+                if (Bukkit.getPluginManager().getPlugin("WorldGuard") != null) {
+                    wg = true;
+                    if (!WorldGuard.allowsBreak(e.getBlock().getLocation())) {
+                        e.setCancelled(true);
+                        return;
+                    }
+                }
+                if (Bukkit.getPluginManager().getPlugin("MassiveCore") != null) {
+                    MassiveCore.canBreakBlock(p, e.getBlock());
+                    fac = true;
+                    if (!MassiveCore.canBreakBlock(p, e.getBlock())) {
+                        e.setCancelled(true);
+                        return;
+                    }
+                } else if (Bukkit.getServer().getPluginManager().getPlugin("Factions") != null) {
+                    fac = true;
+                    if (!Factions.canBreakBlock(p, e.getBlock())) {
+                        e.setCancelled(true);
+                        return;
+                    }
+                }
                 if (cb.getBlockList(level).containsKey(e.getBlock().getType().toString())) {
                     e.setCancelled(true);
                     //Store the price of the block
@@ -99,15 +122,21 @@ public class BlockBreak implements Listener {
                             Block check = e.getBlock().getRelative(0, i, 0);
                             if (check.getType().toString().equalsIgnoreCase("SUGAR_CANE_BLOCK") ||
                                     e.getBlock().getType().equals(Material.SUGAR_CANE)) {
-                                check.getDrops().clear();
-                                check.setType(Material.AIR);
-                                if (isSelling) {
-                                    econ.depositPlayer(p, price);
-                                    for (String m : lpf.getMessages().getStringList("sell")) {
-                                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', m).replace("%price%", String.valueOf(price)));
-                                    }
+                                if (wg && !WorldGuard.allowsBreak(check.getLocation())) {
+                                    //Do nothing just return to the start of the loop
+                                } else if (fac && !Factions.canBreakBlock(p, check)) {
+                                    //Do nothing just return to the start of the loop
                                 } else {
-                                    p.getInventory().addItem(new ItemStack(Material.SUGAR_CANE));
+                                    check.getDrops().clear();
+                                    check.setType(Material.AIR);
+                                    if (isSelling) {
+                                        econ.depositPlayer(p, price);
+                                        for (String m : lpf.getMessages().getStringList("sell")) {
+                                            p.sendMessage(ChatColor.translateAlternateColorCodes('&', m).replace("%price%", String.valueOf(price)));
+                                        }
+                                    } else {
+                                        p.getInventory().addItem(new ItemStack(Material.SUGAR_CANE));
+                                    }
                                 }
                             }
                         }
@@ -115,15 +144,21 @@ public class BlockBreak implements Listener {
                         for (int i = 4; i >= 0; i--) {
                             Block check = e.getBlock().getRelative(0, i, 0);
                             if (check.getType().equals(Material.CACTUS)) {
-                                check.getDrops().clear();
-                                check.setType(Material.AIR);
-                                if (isSelling) {
-                                    econ.depositPlayer(p, price);
-                                    for (String m : lpf.getMessages().getStringList("sell")) {
-                                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', m).replace("%price%", String.valueOf(price)));
-                                    }
+                                if (wg && !WorldGuard.allowsBreak(check.getLocation())) {
+                                    //Do nothing just return to the start of the loop
+                                } else if (fac && !Factions.canBreakBlock(p, check)) {
+                                    //Do nothing just return to the start of the loop
                                 } else {
-                                    p.getInventory().addItem(new ItemStack(CACTUS));
+                                    check.getDrops().clear();
+                                    check.setType(Material.AIR);
+                                    if (isSelling) {
+                                        econ.depositPlayer(p, price);
+                                        for (String m : lpf.getMessages().getStringList("sell")) {
+                                            p.sendMessage(ChatColor.translateAlternateColorCodes('&', m).replace("%price%", String.valueOf(price)));
+                                        }
+                                    } else {
+                                        p.getInventory().addItem(new ItemStack(Material.CACTUS));
+                                    }
                                 }
                             }
                         }
