@@ -82,8 +82,10 @@ public class CollateBlocks {
      * Get the hashmap for that level of harvester
      *
      * @param level string, must not be null.
-     * @return the hashmap for that tool. if the level is not specified return null.
+     * @return the hashmap for that tool, if the level is not specified return null.
+     * @throws InvalidLevelException throws if the level of tool is invalid.
      */
+
     public HashMap getBlockList(String level) throws InvalidLevelException {
         //This is an easy way to determine which price to use
         if (level.equalsIgnoreCase("1")) {

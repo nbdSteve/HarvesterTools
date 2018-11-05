@@ -31,7 +31,6 @@ public class GuiClick implements Listener {
     //Get the server economy
     private Economy econ = HarvesterTools.getEconomy();
 
-    @SuppressWarnings("deprecation")
     @EventHandler
     public void onClick(InventoryClickEvent e) {
         //Store the player
@@ -50,8 +49,8 @@ public class GuiClick implements Listener {
                 String ttool;
                 String perm;
                 NumberFormat df = new DecimalFormat("#,###");
-                //Check to see if it is a harvester tool
-                if (toolMeta.getDisplayName() != " ") {
+                //Check to see if it is a valid tool
+                if (!toolMeta.getDisplayName().equalsIgnoreCase(" ")) {
                     if (toolLore.contains(ChatColor.translateAlternateColorCodes('&',
                             lpf.getHarvester().getString("harvester-tool-1-gui.unique")))) {
                         perm = "1";
@@ -100,7 +99,7 @@ public class GuiClick implements Listener {
                     } else {
                         return;
                     }
-                    //Verify that the player has permission to buy that tool
+                    //Check that the player has permission to buy that tool
                     if (p.hasPermission("harvester.gui." + perm)) {
                         if (p.getInventory().firstEmpty() != -1) {
                             double price = lpf.getHarvester().getDouble(toolType + ".price");

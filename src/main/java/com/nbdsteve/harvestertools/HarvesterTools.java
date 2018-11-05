@@ -22,6 +22,9 @@ public final class HarvesterTools extends JavaPlugin {
     //New collate blocks instance
     private CollateBlocks cb;
 
+    /**
+     * Method called when the plugin starts, register all events and commands in this method
+     */
     @Override
     public void onEnable() {
         getLogger().info("Thanks for using HarvesterTools - nbdSteve");
@@ -42,6 +45,9 @@ public final class HarvesterTools extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new ModeChange(), this);
     }
 
+    /**
+     * Method called when the plugin is disabled
+     */
     @Override
     public void onDisable() {
         getLogger().info("Thanks for using HarvesterTools - nbdSteve");

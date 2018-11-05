@@ -49,15 +49,15 @@ public class HarvesterGui {
         for (int z = 0; z < lpf.getConfig().getInt("gui.size"); z++) {
             i.setItem(z, f1);
         }
-        //Add all of the harvester tools to the inventory
+        //Add all of the tools to the inventory
         for (int x = 1; x < 10; x++) {
             String tool = "harvester-tool-" + String.valueOf(x) + "-gui";
             if (lpf.getHarvester().getBoolean(tool + ".enabled")) {
+                //Create the tool
                 ItemStack ttool = new ItemStack(
                         Material.valueOf(lpf.getHarvester().getString(tool + ".gui-item").toUpperCase()), 1);
                 ItemMeta ttoolMeta = ttool.getItemMeta();
                 List<String> ttoolLore = new ArrayList<String>();
-
                 ttoolMeta.setDisplayName(
                         ChatColor.translateAlternateColorCodes('&', lpf.getHarvester().getString(tool + ".name")));
                 for (String lore : lpf.getHarvester().getStringList(tool + ".lore")) {
@@ -69,6 +69,7 @@ public class HarvesterGui {
                 }
                 ttoolMeta.setLore(ttoolLore);
                 ttool.setItemMeta(ttoolMeta);
+                //Add it to the gui
                 i.setItem(lpf.getHarvester().getInt(tool + ".gui-slot"), ttool);
             } else {
 

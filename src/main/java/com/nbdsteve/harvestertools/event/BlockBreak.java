@@ -24,7 +24,7 @@ import java.util.List;
 
 /**
  * Event called when the player breaks a block, most of the code is not executed unless they are using the
- * harvester tool. The tool check is done first to reduce memory usage.
+ * tool. The tool check is done first to reduce memory usage.
  */
 public class BlockBreak implements Listener {
     //Register the main class
@@ -34,12 +34,12 @@ public class BlockBreak implements Listener {
     //Register the collate blocks instance
     private CollateBlocks cb = ((HarvesterTools) pl).getBlocks();
     //Get the server economy
-    Economy econ = HarvesterTools.getEconomy();
+    private Economy econ = HarvesterTools.getEconomy();
 
     /**
      * All code for the event is store in this method.
-     * @param e the event, cannot be null
-     * @throws InvalidLevelException thrown if the level of harvester is invalid
+     * @param e the event, cannot be null.
+     * @throws InvalidLevelException thrown if the level of tool is invalid.
      */
     @EventHandler
     public void onBreak(BlockBreakEvent e) throws InvalidLevelException {
