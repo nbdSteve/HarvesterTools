@@ -75,7 +75,7 @@ public class CollateBlocks {
             blockListTool8.put(parts[0].toUpperCase(), priceLevel8);
             blockListTool9.put(parts[0].toUpperCase(), priceLevel9);
         }
-        pl.getLogger().info("Calculating all block prices...");
+        pl.getLogger().info("Calculating block prices...");
     }
 
     /**

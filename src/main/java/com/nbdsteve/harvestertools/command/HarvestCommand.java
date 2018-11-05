@@ -22,13 +22,13 @@ import java.util.List;
 /**
  * Class for the /harvest and /h command for the plugin
  */
-public class HarvesterCommand implements CommandExecutor {
+public class HarvestCommand implements CommandExecutor {
     //Register the main class
     private Plugin pl = HarvesterTools.getPlugin(HarvesterTools.class);
     //Register LoadProvideFiles instance
     private LoadProvidedFiles lpf = ((HarvesterTools) pl).getFiles();
     //Register class so that command will work
-    public HarvesterCommand(HarvesterTools pl) {
+    public HarvestCommand(HarvesterTools pl) {
         this.pl = pl;
     }
     //Register the collate blocks instance
@@ -126,7 +126,6 @@ public class HarvesterCommand implements CommandExecutor {
                     int x = 0;
                     String item = args[2].toUpperCase();
                     String level = "harvester-tool-" + args[3];
-
                     try {
                         target = pl.getServer().getPlayer(args[1]);
                     } catch (Exception e) {
@@ -173,11 +172,11 @@ public class HarvesterCommand implements CommandExecutor {
                             }
                         }
                     }
-                    if (size <= 5 && size >= 1) {
+                    if (size <= 9 && size >= 1) {
                         while (x < amount) {
                             ItemStack tool = new ItemStack(Material.valueOf(item));
                             ItemMeta toolMeta = tool.getItemMeta();
-                            List<String> toolLore = new ArrayList<String>();
+                            List<String> toolLore = new ArrayList<>();
 
                             toolMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&',
                                     lpf.getHarvester().getString(level + ".name")));

@@ -2,12 +2,12 @@ C:\Users\deeb0\Desktop\minecraft\Intellj Plugins\HarvesterTools\src\main\java\co
 C:\Users\deeb0\Desktop\minecraft\Intellj Plugins\HarvesterTools\src\main\java\com\nbdsteve\harvestertools\event\gui\GuiClick.java
 C:\Users\deeb0\Desktop\minecraft\Intellj Plugins\HarvesterTools\src\main\java\com\nbdsteve\harvestertools\HarvesterTools.java
 C:\Users\deeb0\Desktop\minecraft\Intellj Plugins\HarvesterTools\src\main\java\com\nbdsteve\harvestertools\support\Factions.java
+C:\Users\deeb0\Desktop\minecraft\Intellj Plugins\HarvesterTools\src\main\java\com\nbdsteve\harvestertools\command\HarvestCommand.java
 C:\Users\deeb0\Desktop\minecraft\Intellj Plugins\HarvesterTools\src\main\java\com\nbdsteve\harvestertools\exception\InvalidLevelException.java
 C:\Users\deeb0\Desktop\minecraft\Intellj Plugins\HarvesterTools\src\main\java\com\nbdsteve\harvestertools\file\CollateBlocks.java
 C:\Users\deeb0\Desktop\minecraft\Intellj Plugins\HarvesterTools\src\main\java\com\nbdsteve\harvestertools\support\MassiveCore.java
 C:\Users\deeb0\Desktop\minecraft\Intellj Plugins\HarvesterTools\src\main\java\com\nbdsteve\harvestertools\file\LoadProvidedFiles.java
-C:\Users\deeb0\Desktop\minecraft\Intellj Plugins\HarvesterTools\src\main\java\com\nbdsteve\harvestertools\file\providedFile\GenerateProvidedFile.java
-C:\Users\deeb0\Desktop\minecraft\Intellj Plugins\HarvesterTools\src\main\java\com\nbdsteve\harvestertools\command\HarvesterCommand.java
+C:\Users\deeb0\Desktop\minecraft\Intellj Plugins\HarvesterTools\src\main\java\com\nbdsteve\harvestertools\file\providedfile\GenerateProvidedFile.java
 C:\Users\deeb0\Desktop\minecraft\Intellj Plugins\HarvesterTools\src\main\java\com\nbdsteve\harvestertools\event\ModeChange.java
 C:\Users\deeb0\Desktop\minecraft\Intellj Plugins\HarvesterTools\src\main\java\com\nbdsteve\harvestertools\gui\HarvesterGui.java
 C:\Users\deeb0\Desktop\minecraft\Intellj Plugins\HarvesterTools\src\main\java\com\nbdsteve\harvestertools\event\BlockBreak.java

@@ -1,4 +1,4 @@
-package com.nbdsteve.harvestertools.file.providedFile;
+package com.nbdsteve.harvestertools.file.providedfile;
 
 import com.nbdsteve.harvestertools.HarvesterTools;
 import org.bukkit.configuration.InvalidConfigurationException;

@@ -1,6 +1,6 @@
 package com.nbdsteve.harvestertools;
 
-import com.nbdsteve.harvestertools.command.HarvesterCommand;
+import com.nbdsteve.harvestertools.command.HarvestCommand;
 import com.nbdsteve.harvestertools.event.BlockBreak;
 import com.nbdsteve.harvestertools.event.ModeChange;
 import com.nbdsteve.harvestertools.event.gui.GuiClick;
@@ -37,8 +37,8 @@ public final class HarvesterTools extends JavaPlugin {
         //Collate the block prices for the plugin
         cb.calculateBlocks();
         //Register the commands for the plugin
-        getCommand("harvest").setExecutor(new HarvesterCommand(this));
-        getCommand("h").setExecutor(new HarvesterCommand(this));
+        getCommand("harvest").setExecutor(new HarvestCommand(this));
+        getCommand("h").setExecutor(new HarvestCommand(this));
         //Register the events for the plugin
         getServer().getPluginManager().registerEvents(new GuiClick(), this);
         getServer().getPluginManager().registerEvents(new BlockBreak(), this);

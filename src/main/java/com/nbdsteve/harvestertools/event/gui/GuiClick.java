@@ -110,7 +110,7 @@ public class GuiClick implements Listener {
                                 ItemStack item = new ItemStack(
                                         Material.valueOf(lpf.getHarvester().getString(toolType + ".gui-item").toUpperCase()));
                                 ItemMeta itemMeta = item.getItemMeta();
-                                List<String> itemLore = new ArrayList<String>();
+                                List<String> itemLore = new ArrayList<>();
                                 itemMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&',
                                         lpf.getHarvester().getString(ttool + ".name")));
                                 for (String lore : lpf.getHarvester().getStringList(ttool + ".lore")) {

@@ -1,7 +1,7 @@
 package com.nbdsteve.harvestertools.file;
 
 import com.nbdsteve.harvestertools.HarvesterTools;
-import com.nbdsteve.harvestertools.file.providedFile.GenerateProvidedFile;
+import com.nbdsteve.harvestertools.file.providedfile.GenerateProvidedFile;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;
 
