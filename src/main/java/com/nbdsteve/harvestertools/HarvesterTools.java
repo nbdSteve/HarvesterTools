@@ -11,6 +11,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
+/**
+ * Core class for the HarvesterTools plugin.
+ */
 public final class HarvesterTools extends JavaPlugin {
     //Economy variable for the plugin
     private static Economy econ;
@@ -43,6 +46,7 @@ public final class HarvesterTools extends JavaPlugin {
     public void onDisable() {
         getLogger().info("Thanks for using HarvesterTools - nbdSteve");
     }
+
     //Set up the economy for the plugin
     private boolean setupEconomy() {
         if (Bukkit.getPluginManager().getPlugin("Vault") == null) {
@@ -55,15 +59,27 @@ public final class HarvesterTools extends JavaPlugin {
         econ = rsp.getProvider();
         return econ != null;
     }
-    //Get the provided files instance
+
+    /**
+     * Get the LoadProvidedFiles instance that has been created
+     * @return LoadProvidedFiles instance
+     */
     public LoadProvidedFiles getFiles() {
         return lpf;
     }
-    //Get the collate blocks instance
+
+    /**
+     * Get the CollateBlocks instance that has been created
+     * @return CollateBlocks instance
+     */
     public CollateBlocks getBlocks() {
         return cb;
     }
-    //Get the economy
+
+    /**
+     * Get the servers economy
+     * @return econ
+     */
     public static Economy getEconomy() {
         return econ;
     }

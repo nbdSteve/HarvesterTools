@@ -10,6 +10,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+/**
+ * Class to generate a file given its name, the file must already be in the resources section.
+ * This class loads files from there.
+ */
 public class GenerateProvidedFile {
     //Register the main class
     private Plugin pl = HarvesterTools.getPlugin(HarvesterTools.class);

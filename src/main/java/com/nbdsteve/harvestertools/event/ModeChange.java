@@ -13,6 +13,10 @@ import org.bukkit.plugin.Plugin;
 
 import java.util.List;
 
+/**
+ * Event called when the player right clicks on a block on in the air with their mouse,
+ * the tool check is done at the start to reduce memory usage.
+ */
 public class ModeChange implements Listener {
     //Register the main class
     private Plugin pl = HarvesterTools.getPlugin(HarvesterTools.class);
@@ -46,6 +50,18 @@ public class ModeChange implements Listener {
                     } else if (toolLore.contains(
                             ChatColor.translateAlternateColorCodes('&', lpf.getHarvester().getString("harvester-tool-5.unique")))) {
                         toolType = "harvester-tool-5";
+                    } else if (toolLore.contains(
+                            ChatColor.translateAlternateColorCodes('&', lpf.getHarvester().getString("harvester-tool-6.unique")))) {
+                        toolType = "harvester-tool-6";
+                    } else if (toolLore.contains(
+                            ChatColor.translateAlternateColorCodes('&', lpf.getHarvester().getString("harvester-tool-7.unique")))) {
+                        toolType = "harvester-tool-7";
+                    } else if (toolLore.contains(
+                            ChatColor.translateAlternateColorCodes('&', lpf.getHarvester().getString("harvester-tool-8.unique")))) {
+                        toolType = "harvester-tool-8";
+                    } else if (toolLore.contains(
+                            ChatColor.translateAlternateColorCodes('&', lpf.getHarvester().getString("harvester-tool-9.unique")))) {
+                        toolType = "harvester-tool-9";
                     } else {
                         return;
                     }

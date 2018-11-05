@@ -19,6 +19,9 @@ import org.bukkit.plugin.Plugin;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class for the /harvest and /h command for the plugin
+ */
 public class HarvesterCommand implements CommandExecutor {
     //Register the main class
     private Plugin pl = HarvesterTools.getPlugin(HarvesterTools.class);

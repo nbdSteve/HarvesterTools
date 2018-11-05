@@ -8,6 +8,9 @@ import org.bukkit.ChatColor;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
+/**
+ * Support class for the plugin Factions
+ */
 public class Factions {
     public static boolean canBreakBlock(Player player, Block block) {
         if (FPlayers.getInstance().getByPlayer(player).getFaction() != null) {

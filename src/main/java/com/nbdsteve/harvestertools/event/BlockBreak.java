@@ -1,5 +1,6 @@
 package com.nbdsteve.harvestertools.event;
 
+import com.nbdsteve.harvestertools.exception.InvalidLevelException;
 import com.nbdsteve.harvestertools.file.CollateBlocks;
 import com.nbdsteve.harvestertools.HarvesterTools;
 import com.nbdsteve.harvestertools.file.LoadProvidedFiles;
@@ -21,6 +22,10 @@ import org.bukkit.plugin.Plugin;
 
 import java.util.List;
 
+/**
+ * Event called when the player breaks a block, most of the code is not executed unless they are using the
+ * harvester tool. The tool check is done first to reduce memory usage.
+ */
 public class BlockBreak implements Listener {
     //Register the main class
     private Plugin pl = HarvesterTools.getPlugin(HarvesterTools.class);
@@ -31,8 +36,13 @@ public class BlockBreak implements Listener {
     //Get the server economy
     Economy econ = HarvesterTools.getEconomy();
 
+    /**
+     * All code for the event is store in this method.
+     * @param e the event, cannot be null
+     * @throws InvalidLevelException thrown if the level of harvester is invalid
+     */
     @EventHandler
-    public void onBreak(BlockBreakEvent e) {
+    public void onBreak(BlockBreakEvent e) throws InvalidLevelException {
         //Get the player
         Player p = e.getPlayer();
         //Check that the player has the harvestertool in their hand
@@ -63,6 +73,22 @@ public class BlockBreak implements Listener {
                         ChatColor.translateAlternateColorCodes('&', lpf.getHarvester().getString("harvester-tool-5.unique")))) {
                     toolType = "harvester-tool-5";
                     level = "5";
+                } else if (toolLore.contains(
+                        ChatColor.translateAlternateColorCodes('&', lpf.getHarvester().getString("harvester-tool-6.unique")))) {
+                    toolType = "harvester-tool-6";
+                    level = "6";
+                } else if (toolLore.contains(
+                        ChatColor.translateAlternateColorCodes('&', lpf.getHarvester().getString("harvester-tool-7.unique")))) {
+                    toolType = "harvester-tool-7";
+                    level = "7";
+                } else if (toolLore.contains(
+                        ChatColor.translateAlternateColorCodes('&', lpf.getHarvester().getString("harvester-tool-8.unique")))) {
+                    toolType = "harvester-tool-8";
+                    level = "8";
+                } else if (toolLore.contains(
+                        ChatColor.translateAlternateColorCodes('&', lpf.getHarvester().getString("harvester-tool-9.unique")))) {
+                    toolType = "harvester-tool-9";
+                    level = "9";
                 } else {
                     return;
                 }
@@ -114,7 +140,7 @@ public class BlockBreak implements Listener {
                     e.setCancelled(true);
                     //Store the price of the block
                     double price = (double) cb.getBlockList(level).get(e.getBlock().getType().toString());
-                    //The sugar cane is so fucking stupid with the new spigot API, it needs to be like this otherwise it wont work properly
+                    //The sugar cane item is annoying with the new spigot API, it needs to be like this otherwise it wont work properly
                     if (e.getBlock().getType().toString().equalsIgnoreCase("SUGAR_CANE_BLOCK") ||
                             e.getBlock().getType().equals(Material.SUGAR_CANE)) {
                         //For the blocks that break from the bottom need to check above for more blocks and break those

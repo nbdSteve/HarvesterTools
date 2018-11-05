@@ -9,5 +9,6 @@ com\nbdsteve\harvestertools\support\WorldGuard.class
 com\nbdsteve\harvestertools\event\ModeChange.class
 com\nbdsteve\harvestertools\support\Factions.class
 com\nbdsteve\harvestertools\file\CollateBlocks.class
+com\nbdsteve\harvestertools\exception\InvalidLevelException.class
 com\nbdsteve\harvestertools\HarvesterTools.class
 com\nbdsteve\harvestertools\file\LoadProvidedFiles$Files.class

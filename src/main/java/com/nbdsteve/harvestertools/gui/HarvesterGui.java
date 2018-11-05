@@ -15,12 +15,19 @@ import org.bukkit.plugin.Plugin;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Merchant Gui class, this creates and adds the harvester tools to the Merchant Gui.
+ */
 public class HarvesterGui {
     //Register the main class
     private Plugin pl = HarvesterTools.getPlugin(HarvesterTools.class);
     //Register LoadProvideFiles instance
     private LoadProvidedFiles lpf = ((HarvesterTools) pl).getFiles();
 
+    /**
+     * Method to create the gui whenever the player runs the /harvest command
+     * @param p player, cannot be null
+     */
     public void gui(Player p) {
         // Creating the inventory with the name & size from the config.yml.
         Inventory i = pl.getServer().createInventory(null, lpf.getConfig().getInt("gui.size"),
@@ -38,13 +45,13 @@ public class HarvesterGui {
             f1M.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         }
         f1.setItemMeta(f1M);
-
+        //Fill the rest of the GUI with the filler item
         for (int z = 0; z < lpf.getConfig().getInt("gui.size"); z++) {
             i.setItem(z, f1);
         }
-        for (int x = 1; x < 6; x++) {
+        //Add all of the harvester tools to the inventory
+        for (int x = 1; x < 10; x++) {
             String tool = "harvester-tool-" + String.valueOf(x) + "-gui";
-
             if (lpf.getHarvester().getBoolean(tool + ".enabled")) {
                 ItemStack ttool = new ItemStack(
                         Material.valueOf(lpf.getHarvester().getString(tool + ".gui-item").toUpperCase()), 1);

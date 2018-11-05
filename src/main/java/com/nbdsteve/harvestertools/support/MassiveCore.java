@@ -8,6 +8,9 @@ import org.bukkit.ChatColor;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
+/**
+ * Support class for the plugin MassiveCore
+ */
 public class MassiveCore {
     public static boolean canBreakBlock(Player player, Block block) {
         Faction P = MPlayer.get(player).getFaction();
