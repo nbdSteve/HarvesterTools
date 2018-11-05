@@ -49,7 +49,7 @@ public class CollateBlocks {
         double priceLevel7 = 0;
         double priceLevel8 = 0;
         double priceLevel9 = 0;
-        for(String m : lpf.getBlocks().getStringList("blocks")) {
+        for (String m : lpf.getBlocks().getStringList("blocks")) {
             String[] parts = m.split("-");
             try {
                 priceLevel1 = Double.parseDouble(parts[1]);
@@ -90,21 +90,21 @@ public class CollateBlocks {
         //This is an easy way to determine which price to use
         if (level.equalsIgnoreCase("1")) {
             return blockListTool1;
-        } else if (level.equalsIgnoreCase("2"))  {
+        } else if (level.equalsIgnoreCase("2")) {
             return blockListTool2;
-        } else if (level.equalsIgnoreCase("3"))  {
+        } else if (level.equalsIgnoreCase("3")) {
             return blockListTool3;
-        } else if (level.equalsIgnoreCase("4"))  {
+        } else if (level.equalsIgnoreCase("4")) {
             return blockListTool4;
-        } else if (level.equalsIgnoreCase("5"))  {
+        } else if (level.equalsIgnoreCase("5")) {
             return blockListTool5;
-        } else if (level.equalsIgnoreCase("6"))  {
+        } else if (level.equalsIgnoreCase("6")) {
             return blockListTool6;
-        } else if (level.equalsIgnoreCase("7"))  {
+        } else if (level.equalsIgnoreCase("7")) {
             return blockListTool7;
-        } else if (level.equalsIgnoreCase("8"))  {
+        } else if (level.equalsIgnoreCase("8")) {
             return blockListTool8;
-        } else if (level.equalsIgnoreCase("9"))  {
+        } else if (level.equalsIgnoreCase("9")) {
             return blockListTool9;
         } else {
             throw new InvalidLevelException("Internal Error. The level of harvester is invalid - please contact the developer.");

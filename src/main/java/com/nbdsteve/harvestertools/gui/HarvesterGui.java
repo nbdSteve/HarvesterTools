@@ -26,6 +26,7 @@ public class HarvesterGui {
 
     /**
      * Method to create the gui whenever the player runs the /harvest command
+     *
      * @param p player, cannot be null
      */
     public void gui(Player p) {

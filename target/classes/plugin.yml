@@ -1,6 +1,6 @@
 name: HarvesterTools
 author: nbdSteve
-version: 1.0-BETA
+version: 1.0
 main: com.nbdsteve.harvestertools.HarvesterTools
 commands:
   h:

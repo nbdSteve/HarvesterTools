@@ -38,6 +38,7 @@ public class BlockBreak implements Listener {
 
     /**
      * All code for the event is store in this method.
+     *
      * @param e the event, cannot be null.
      * @throws InvalidLevelException thrown if the level of tool is invalid.
      */

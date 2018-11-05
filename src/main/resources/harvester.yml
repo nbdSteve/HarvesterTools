@@ -35,14 +35,14 @@ harvester-tool-1:
   # Enchantment Lore, you can make this as many lines as you would like.
   # The mode-unique-id and %mode% can be on any line! Just make sure they are on the same line
   lore:
-    - "&eHarvest I"
-    - "&7 "
-    - "&7&lMODE: %mode%"
-    - "&7 "
-    - "&7&oThis tool was created to stream line"
-    - "&7&oselling crops and plant matter. Attack"
-    - "&7&oyour greens and bathe in the profits."
-    - "&7 "
+  - "&eHarvest I"
+  - "&7 "
+  - "&7&lMODE: %mode%"
+  - "&7 "
+  - "&7&oThis tool was created to stream line"
+  - "&7&oselling crops and plant matter. Attack"
+  - "&7&oyour greens and bathe in the profits."
+  - "&7 "
 #
 
 #

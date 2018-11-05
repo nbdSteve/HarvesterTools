@@ -23,14 +23,15 @@ import java.util.List;
  * Class for the /harvest and /h command for the plugin
  */
 public class HarvestCommand implements CommandExecutor {
-    //Register the main class
-    private Plugin pl = HarvesterTools.getPlugin(HarvesterTools.class);
-    //Register LoadProvideFiles instance
-    private LoadProvidedFiles lpf = ((HarvesterTools) pl).getFiles();
     //Register class so that command will work
     public HarvestCommand(HarvesterTools pl) {
         this.pl = pl;
     }
+
+    //Register the main class
+    private Plugin pl = HarvesterTools.getPlugin(HarvesterTools.class);
+    //Register LoadProvideFiles instance
+    private LoadProvidedFiles lpf = ((HarvesterTools) pl).getFiles();
     //Register the collate blocks instance
     private CollateBlocks cb = ((HarvesterTools) pl).getBlocks();
 
@@ -177,7 +178,6 @@ public class HarvestCommand implements CommandExecutor {
                             ItemStack tool = new ItemStack(Material.valueOf(item));
                             ItemMeta toolMeta = tool.getItemMeta();
                             List<String> toolLore = new ArrayList<>();
-
                             toolMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&',
                                     lpf.getHarvester().getString(level + ".name")));
 
@@ -189,7 +189,6 @@ public class HarvestCommand implements CommandExecutor {
                                 String[] parts = ench.split("-");
                                 toolMeta.addEnchant(Enchantment.getByName(parts[0]), Integer.parseInt(parts[1]), true);
                             }
-
                             toolMeta.setLore(toolLore);
                             tool.setItemMeta(toolMeta);
                             target.getInventory().addItem(tool);

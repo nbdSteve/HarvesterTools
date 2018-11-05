@@ -15,7 +15,7 @@ public class MassiveCore {
     public static boolean canBreakBlock(Player player, Block block) {
         Faction P = MPlayer.get(player).getFaction();
         Faction B = BoardColl.get().getFactionAt(PS.valueOf(block.getLocation()));
-        if(ChatColor.stripColor(B.getName()).equalsIgnoreCase("Wilderness") || P == B) {
+        if (ChatColor.stripColor(B.getName()).equalsIgnoreCase("Wilderness") || P == B) {
             return true;
         }
         return false;
