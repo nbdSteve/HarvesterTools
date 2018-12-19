@@ -145,47 +145,65 @@ public class BlockBreak implements Listener {
                     if (e.getBlock().getType().toString().equalsIgnoreCase("SUGAR_CANE_BLOCK") ||
                             e.getBlock().getType().equals(Material.SUGAR_CANE)) {
                         //For the blocks that break from the bottom need to check above for more blocks and break those
-                        for (int i = 4; i >= 0; i--) {
-                            Block check = e.getBlock().getRelative(0, i, 0);
-                            if (check.getType().toString().equalsIgnoreCase("SUGAR_CANE_BLOCK") ||
-                                    e.getBlock().getType().equals(Material.SUGAR_CANE)) {
-                                if (wg && !WorldGuard.allowsBreak(check.getLocation())) {
-                                    //Do nothing just return to the start of the loop
-                                } else if (fac && !Factions.canBreakBlock(p, check)) {
-                                    //Do nothing just return to the start of the loop
-                                } else {
-                                    check.getDrops().clear();
-                                    check.setType(Material.AIR);
-                                    if (isSelling) {
-                                        econ.depositPlayer(p, price);
-                                        for (String m : lpf.getMessages().getStringList("sell")) {
-                                            p.sendMessage(ChatColor.translateAlternateColorCodes('&', m).replace("%price%", String.valueOf(price)));
-                                        }
-                                    } else {
-                                        p.getInventory().addItem(new ItemStack(Material.SUGAR_CANE));
+                        int x = e.getBlock().getX();
+                        int z = e.getBlock().getZ();
+                        int y = e.getBlock().getY();
+                        int height = y;
+                        //Get the total height of the sugar cane and store it
+                        while (p.getWorld().getBlockAt(x, height, z).getType().toString().equalsIgnoreCase("SUGAR_CANE_BLOCK") && height < 256) {
+                            height++;
+                        }
+                        //Subtract one because that is how the while loop works
+                        height--;
+                        //Loop for all of the blocks and sell / harvest them, because we know they are sugar cane
+                        for (int i = y; i <= height; height--) {
+                            Block check = p.getWorld().getBlockAt(x, height, z);
+                            if (wg && !WorldGuard.allowsBreak(check.getLocation())) {
+                                //Do nothing just return to the start of the loop
+                            } else if (fac && !Factions.canBreakBlock(p, check)) {
+                                //Do nothing just return to the start of the loop
+                            } else {
+                                check.getDrops().clear();
+                                check.setType(Material.AIR);
+                                if (isSelling) {
+                                    econ.depositPlayer(p, price);
+                                    for (String m : lpf.getMessages().getStringList("sell")) {
+                                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', m).replace("%price%", String.valueOf(price)));
                                     }
+                                } else {
+                                    p.getInventory().addItem(new ItemStack(Material.SUGAR_CANE));
                                 }
                             }
                         }
                     } else if (e.getBlock().getType().equals(Material.CACTUS)) {
-                        for (int i = 4; i >= 0; i--) {
-                            Block check = e.getBlock().getRelative(0, i, 0);
-                            if (check.getType().equals(Material.CACTUS)) {
-                                if (wg && !WorldGuard.allowsBreak(check.getLocation())) {
-                                    //Do nothing just return to the start of the loop
-                                } else if (fac && !Factions.canBreakBlock(p, check)) {
-                                    //Do nothing just return to the start of the loop
-                                } else {
-                                    check.getDrops().clear();
-                                    check.setType(Material.AIR);
-                                    if (isSelling) {
-                                        econ.depositPlayer(p, price);
-                                        for (String m : lpf.getMessages().getStringList("sell")) {
-                                            p.sendMessage(ChatColor.translateAlternateColorCodes('&', m).replace("%price%", String.valueOf(price)));
-                                        }
-                                    } else {
-                                        p.getInventory().addItem(new ItemStack(Material.CACTUS));
+                        //For the blocks that break from the bottom need to check above for more blocks and break those
+                        int x = e.getBlock().getX();
+                        int z = e.getBlock().getZ();
+                        int y = e.getBlock().getY();
+                        int height = y;
+                        //Get the total height of the sugar cane and store it
+                        while (p.getWorld().getBlockAt(x, height, z).getType().equals(Material.CACTUS) && height < 256) {
+                            height++;
+                        }
+                        //Subtract one because that is how the while loop works
+                        height--;
+                        //Loop for all of the blocks and sell / harvest them, because we know they are sugar cane
+                        for (int i = y; i <= height; height--) {
+                            Block check = p.getWorld().getBlockAt(x, height, z);
+                            if (wg && !WorldGuard.allowsBreak(check.getLocation())) {
+                                //Do nothing just return to the start of the loop
+                            } else if (fac && !Factions.canBreakBlock(p, check)) {
+                                //Do nothing just return to the start of the loop
+                            } else {
+                                check.getDrops().clear();
+                                check.setType(Material.AIR);
+                                if (isSelling) {
+                                    econ.depositPlayer(p, price);
+                                    for (String m : lpf.getMessages().getStringList("sell")) {
+                                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', m).replace("%price%", String.valueOf(price)));
                                     }
+                                } else {
+                                    p.getInventory().addItem(new ItemStack(Material.CACTUS));
                                 }
                             }
                         }
