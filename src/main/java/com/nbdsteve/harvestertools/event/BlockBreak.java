@@ -51,46 +51,22 @@ public class BlockBreak implements Listener {
             if (p.getInventory().getItemInHand().getItemMeta().hasLore()) {
                 ItemMeta toolMeta = p.getInventory().getItemInHand().getItemMeta();
                 List<String> toolLore = toolMeta.getLore();
-                String toolType;
-                String level;
+                String toolType = null;
+                String level = null;
                 //Get the level of harvester from the tool lore
-                if (toolLore.contains(
-                        ChatColor.translateAlternateColorCodes('&', lpf.getHarvester().getString("harvester-tool-1.unique")))) {
-                    toolType = "harvester-tool-1";
-                    level = "1";
-                } else if (toolLore.contains(
-                        ChatColor.translateAlternateColorCodes('&', lpf.getHarvester().getString("harvester-tool-2.unique")))) {
-                    toolType = "harvester-tool-2";
-                    level = "2";
-                } else if (toolLore.contains(
-                        ChatColor.translateAlternateColorCodes('&', lpf.getHarvester().getString("harvester-tool-3.unique")))) {
-                    toolType = "harvester-tool-3";
-                    level = "3";
-                } else if (toolLore.contains(
-                        ChatColor.translateAlternateColorCodes('&', lpf.getHarvester().getString("harvester-tool-4.unique")))) {
-                    toolType = "harvester-tool-4";
-                    level = "4";
-                } else if (toolLore.contains(
-                        ChatColor.translateAlternateColorCodes('&', lpf.getHarvester().getString("harvester-tool-5.unique")))) {
-                    toolType = "harvester-tool-5";
-                    level = "5";
-                } else if (toolLore.contains(
-                        ChatColor.translateAlternateColorCodes('&', lpf.getHarvester().getString("harvester-tool-6.unique")))) {
-                    toolType = "harvester-tool-6";
-                    level = "6";
-                } else if (toolLore.contains(
-                        ChatColor.translateAlternateColorCodes('&', lpf.getHarvester().getString("harvester-tool-7.unique")))) {
-                    toolType = "harvester-tool-7";
-                    level = "7";
-                } else if (toolLore.contains(
-                        ChatColor.translateAlternateColorCodes('&', lpf.getHarvester().getString("harvester-tool-8.unique")))) {
-                    toolType = "harvester-tool-8";
-                    level = "8";
-                } else if (toolLore.contains(
-                        ChatColor.translateAlternateColorCodes('&', lpf.getHarvester().getString("harvester-tool-9.unique")))) {
-                    toolType = "harvester-tool-9";
-                    level = "9";
-                } else {
+                for (int i = 1; i < 10; i++) {
+                    String tool = "harvester-tool-" + String.valueOf(i);
+                    try {
+                        lpf.getHarvester().getString(tool + ".unique");
+                        if (toolLore.contains(ChatColor.translateAlternateColorCodes('&', lpf.getHarvester().getString(tool + ".unique")))) {
+                            toolType = tool;
+                            level = String.valueOf(i);
+                        }
+                    } catch (Exception ex) {
+                        //Do nothing, this tool isn't active or doesn't exist
+                    }
+                }
+                if (toolType == null) {
                     return;
                 }
                 //If the tool is in the correct mode this will be set to true
@@ -141,14 +117,14 @@ public class BlockBreak implements Listener {
                     e.setCancelled(true);
                     //Store the price of the block
                     double price = (double) cb.getBlockList(level).get(e.getBlock().getType().toString());
+                    //Store the blocks location
+                    int x = e.getBlock().getX();
+                    int z = e.getBlock().getZ();
+                    int y = e.getBlock().getY();
+                    int height = y;
                     //The sugar cane item is annoying with the new spigot API, it needs to be like this otherwise it wont work properly
                     if (e.getBlock().getType().toString().equalsIgnoreCase("SUGAR_CANE_BLOCK") ||
                             e.getBlock().getType().equals(Material.SUGAR_CANE)) {
-                        //For the blocks that break from the bottom need to check above for more blocks and break those
-                        int x = e.getBlock().getX();
-                        int z = e.getBlock().getZ();
-                        int y = e.getBlock().getY();
-                        int height = y;
                         //Get the total height of the sugar cane and store it
                         while (p.getWorld().getBlockAt(x, height, z).getType().toString().equalsIgnoreCase("SUGAR_CANE_BLOCK") && height < 256) {
                             height++;
@@ -176,11 +152,6 @@ public class BlockBreak implements Listener {
                             }
                         }
                     } else if (e.getBlock().getType().equals(Material.CACTUS)) {
-                        //For the blocks that break from the bottom need to check above for more blocks and break those
-                        int x = e.getBlock().getX();
-                        int z = e.getBlock().getZ();
-                        int y = e.getBlock().getY();
-                        int height = y;
                         //Get the total height of the sugar cane and store it
                         while (p.getWorld().getBlockAt(x, height, z).getType().equals(Material.CACTUS) && height < 256) {
                             height++;

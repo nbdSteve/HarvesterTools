@@ -33,36 +33,20 @@ public class ModeChange implements Listener {
                 if (p.getInventory().getItemInHand().getItemMeta().hasLore()) {
                     ItemMeta toolMeta = p.getInventory().getItemInHand().getItemMeta();
                     List<String> toolLore = toolMeta.getLore();
-                    String toolType;
+                    String toolType = null;
                     //Get the level of harvester from the tool lore
-                    if (toolLore.contains(
-                            ChatColor.translateAlternateColorCodes('&', lpf.getHarvester().getString("harvester-tool-1.unique")))) {
-                        toolType = "harvester-tool-1";
-                    } else if (toolLore.contains(
-                            ChatColor.translateAlternateColorCodes('&', lpf.getHarvester().getString("harvester-tool-2.unique")))) {
-                        toolType = "harvester-tool-2";
-                    } else if (toolLore.contains(
-                            ChatColor.translateAlternateColorCodes('&', lpf.getHarvester().getString("harvester-tool-3.unique")))) {
-                        toolType = "harvester-tool-3";
-                    } else if (toolLore.contains(
-                            ChatColor.translateAlternateColorCodes('&', lpf.getHarvester().getString("harvester-tool-4.unique")))) {
-                        toolType = "harvester-tool-4";
-                    } else if (toolLore.contains(
-                            ChatColor.translateAlternateColorCodes('&', lpf.getHarvester().getString("harvester-tool-5.unique")))) {
-                        toolType = "harvester-tool-5";
-                    } else if (toolLore.contains(
-                            ChatColor.translateAlternateColorCodes('&', lpf.getHarvester().getString("harvester-tool-6.unique")))) {
-                        toolType = "harvester-tool-6";
-                    } else if (toolLore.contains(
-                            ChatColor.translateAlternateColorCodes('&', lpf.getHarvester().getString("harvester-tool-7.unique")))) {
-                        toolType = "harvester-tool-7";
-                    } else if (toolLore.contains(
-                            ChatColor.translateAlternateColorCodes('&', lpf.getHarvester().getString("harvester-tool-8.unique")))) {
-                        toolType = "harvester-tool-8";
-                    } else if (toolLore.contains(
-                            ChatColor.translateAlternateColorCodes('&', lpf.getHarvester().getString("harvester-tool-9.unique")))) {
-                        toolType = "harvester-tool-9";
-                    } else {
+                    for (int i = 1; i < 10; i++) {
+                        String tool = "harvester-tool-" + String.valueOf(i);
+                        try {
+                            lpf.getHarvester().getString(tool + ".unique");
+                            if (toolLore.contains(ChatColor.translateAlternateColorCodes('&', lpf.getHarvester().getString(tool + ".unique")))) {
+                                toolType = tool;
+                            }
+                        } catch (Exception ex) {
+                            //Do nothing, this tool isn't active or doesn't exist
+                        }
+                    }
+                    if (toolType == null) {
                         return;
                     }
                     //Store the strings for the mode that are provided in the harvester.yml
