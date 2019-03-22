@@ -1,6 +1,7 @@
 com\nbdsteve\harvestertools\event\gui\GuiClick.class
 com\nbdsteve\harvestertools\event\BlockBreak.class
 com\nbdsteve\harvestertools\support\MassiveCore.class
+com\nbdsteve\harvestertools\event\BlockBreak$1.class
 com\nbdsteve\harvestertools\gui\HarvesterGui.class
 com\nbdsteve\harvestertools\file\LoadProvidedFiles.class
 com\nbdsteve\harvestertools\support\WorldGuard.class

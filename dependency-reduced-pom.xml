@@ -4,7 +4,7 @@
   <groupId>com.nbdSteve</groupId>
   <artifactId>HarvesterTools</artifactId>
   <name>HarvesterTools</name>
-  <version>1.1.2</version>
+  <version>1.2.0</version>
   <build>
     <defaultGoal>clean package</defaultGoal>
     <resources>
@@ -73,12 +73,12 @@
           <groupId>com.google.code.gson</groupId>
         </exclusion>
         <exclusion>
-          <artifactId>snakeyaml</artifactId>
-          <groupId>org.yaml</groupId>
-        </exclusion>
-        <exclusion>
           <artifactId>bungeecord-chat</artifactId>
           <groupId>net.md-5</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>snakeyaml</artifactId>
+          <groupId>org.yaml</groupId>
         </exclusion>
       </exclusions>
     </dependency>

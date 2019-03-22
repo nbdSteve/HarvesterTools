@@ -10,6 +10,7 @@ import com.nbdsteve.harvestertools.support.WorldGuard;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.CropState;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -18,9 +19,14 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.material.Crops;
+import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Event called when the player breaks a block, most of the code is not executed unless they are using the
@@ -35,6 +41,9 @@ public class BlockBreak implements Listener {
     private CollateBlocks cb = ((HarvesterTools) pl).getBlocks();
     //Get the server economy
     private Economy econ = HarvesterTools.getEconomy();
+
+    private HashMap<UUID, Long> playersBreaking = new HashMap<>();
+    private double totalDeposit;
 
     /**
      * All code for the event is store in this method.
@@ -139,15 +148,18 @@ public class BlockBreak implements Listener {
                             } else if (fac && !Factions.canBreakBlock(p, check)) {
                                 //Do nothing just return to the start of the loop
                             } else {
-                                check.getDrops().clear();
-                                check.setType(Material.AIR);
                                 if (isSelling) {
-                                    econ.depositPlayer(p, price);
-                                    for (String m : lpf.getMessages().getStringList("sell")) {
-                                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', m).replace("%price%", String.valueOf(price)));
-                                    }
+                                    check.getDrops().clear();
+                                    check.setType(Material.AIR);
+                                    updateCooldown(p, price);
                                 } else {
-                                    p.getInventory().addItem(new ItemStack(Material.SUGAR_CANE));
+                                    if (inventorySpace(p)) {
+                                        check.getDrops().clear();
+                                        check.setType(Material.AIR);
+                                        p.getInventory().addItem(new ItemStack(Material.SUGAR_CANE));
+                                    } else {
+                                        check.breakNaturally();
+                                    }
                                 }
                             }
                         }
@@ -166,34 +178,87 @@ public class BlockBreak implements Listener {
                             } else if (fac && !Factions.canBreakBlock(p, check)) {
                                 //Do nothing just return to the start of the loop
                             } else {
-                                check.getDrops().clear();
-                                check.setType(Material.AIR);
                                 if (isSelling) {
-                                    econ.depositPlayer(p, price);
-                                    for (String m : lpf.getMessages().getStringList("sell")) {
-                                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', m).replace("%price%", String.valueOf(price)));
-                                    }
+                                    check.getDrops().clear();
+                                    check.setType(Material.AIR);
+                                    updateCooldown(p, price);
                                 } else {
-                                    p.getInventory().addItem(new ItemStack(Material.CACTUS));
+                                    if (inventorySpace(p)) {
+                                        check.getDrops().clear();
+                                        check.setType(Material.AIR);
+                                        p.getInventory().addItem(new ItemStack(Material.CACTUS));
+                                    } else {
+                                        check.breakNaturally();
+                                    }
                                 }
                             }
                         }
                     } else {
                         if (isSelling) {
                             e.getBlock().getDrops().clear();
-                            econ.depositPlayer(p, price);
-                            for (String m : lpf.getMessages().getStringList("sell")) {
-                                p.sendMessage(ChatColor.translateAlternateColorCodes('&', m).replace("%price%", String.valueOf(price)));
-                            }
+                            e.getBlock().setType(Material.AIR);
+                            updateCooldown(p, price);
                         } else {
-                            for (ItemStack item : e.getBlock().getDrops()) {
-                                p.getInventory().addItem(item);
+                            if (inventorySpace(p)) {
+                                for (ItemStack item : e.getBlock().getDrops()) {
+                                    p.getInventory().addItem(item);
+                                }
+                                e.getBlock().getDrops().clear();
+                                e.getBlock().setType(Material.AIR);
+                            } else {
+                                e.getBlock().breakNaturally();
                             }
-                            e.getBlock().getDrops().clear();
                         }
                     }
                 }
             }
         }
+    }
+
+    private void updateCooldown(Player player, double price) {
+        //Deposit the money into the players account.
+        econ.depositPlayer(player, price);
+        //Add the price to the total deposit, this will be sent to the player.
+        totalDeposit += price;
+        //If the hashmap contains the player, remove them and update it.
+        if (playersBreaking.containsKey(player.getUniqueId())) {
+            playersBreaking.remove(player.getUniqueId());
+        }
+        playersBreaking.put(player.getUniqueId(), System.currentTimeMillis() + (pl.getConfig().getInt("message-delay") * 10));
+        //Check to see if the player has finished breaking blocks.
+        delayedMessage(player, price);
+    }
+
+    private void delayedMessage(Player player, double price) {
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                if (playersBreaking.containsKey(player.getUniqueId())) {
+                    if (playersBreaking.get(player.getUniqueId()) - System.currentTimeMillis() <= 0) {
+                        for (String m : lpf.getMessages().getStringList("sell")) {
+                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', m).replace
+                                    ("%price%", String.valueOf(totalDeposit)).replace
+                                    ("%blocksHarvested%", String.valueOf((int) (totalDeposit / price))));
+                        }
+                        resetTotalDeposit();
+                        playersBreaking.remove(player.getUniqueId());
+                    }
+                }
+            }
+        }.runTaskLater(pl, pl.getConfig().getInt("message-delay"));
+    }
+
+    private boolean inventorySpace(Player player) {
+        if (player.getInventory().firstEmpty() == -1) {
+            for (String m : lpf.getMessages().getStringList("inventory-full-harvest")) {
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', m));
+            }
+            return false;
+        }
+        return true;
+    }
+
+    private void resetTotalDeposit() {
+        this.totalDeposit = 0;
     }
 }

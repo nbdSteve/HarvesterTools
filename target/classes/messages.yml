@@ -1,5 +1,5 @@
 #
-# HarvesterTools messages.yml v1.1.2
+# HarvesterTools messages.yml v1.2.0
 #
 # Message sent to the player when they type the /harvest help command.
 # Requires permission: harvester.help
@@ -132,11 +132,25 @@ inventory-full:
 #
 
 #
+# Message sent to the player if they are harvesting and their inv is full.
+inventory-full-harvest:
+  - "&7 "
+  - "&f&lHarvesterTools:"
+  - "&c&lINVENTORY FULL! &7Free some space to have items put into your inventory."
+  - "&7 "
+#
+
+#
 # Message sent to the player when the are using the tool in sell mode
 # Set this to nothing for no message to be sent,
 # the %price% placeholder will be swapped with the items price.
+# The %blocksHarvested% placeholder will be swapped with the number of harvested blocks
 sell:
-- "&a&l+ &a$%price%"
+  - "&7 "
+  - "&f&lHarvesterTools:"
+  - "&a&l+$%price%&7 has been added to your account."
+  - "&7You harvested &e&l%blocksHarvested% &7block(s)."
+  - "&7 "
 #
 
 #
