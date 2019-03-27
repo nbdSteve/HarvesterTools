@@ -154,6 +154,14 @@ sell:
 #
 
 #
+start-selling:
+  - "&7 "
+  - "&f&lHarvesterTools:"
+  - "&7You have started autoselling crops at &a&n+$%price%&7, per block."
+  - "&7 "
+#
+
+#
 # Message sent to the player when their tool changes from harvest to sell mode
 change-to-sell-mode:
 - "&7 "

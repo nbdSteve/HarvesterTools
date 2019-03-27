@@ -1,7 +1,7 @@
 name: HarvesterTools
-author: nbdSteve
-version: 1.2.0
-main: com.nbdsteve.harvestertools.HarvesterTools
+version: 1.2.1
+main: dev.nuer.harvest.HarvesterTools
+author: Nuer
 commands:
   h:
     usage: /<command>

@@ -1,7 +1,7 @@
 name: HarvesterTools
-author: nbdSteve
 version: ${project.version}
-main: com.nbdsteve.harvestertools.HarvesterTools
+main: dev.nuer.harvest.HarvesterTools
+author: Nuer
 commands:
   h:
     usage: /<command>
