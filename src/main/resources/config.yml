@@ -1,5 +1,5 @@
 #
-# HarvesterTools config.yml v1.2.0
+# HarvesterTools config.yml v1.2.1
 # Developed by nbdSteve
 #
 # Plugin Support Discord: https://discord.gg/j6Yj5B8
@@ -7,7 +7,7 @@
 # Copyright Owner: nbdSteve
 #
 # The delay (in ticks) for selling updates. This will occur after the player breaks their last sugar cane
-message-delay: 40
+message-delay: 60
 #
 # These are values for the GUI that will be opened with the /harvest command.
 gui:

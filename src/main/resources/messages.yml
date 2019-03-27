@@ -1,5 +1,5 @@
 #
-# HarvesterTools messages.yml v1.2.0
+# HarvesterTools messages.yml v1.2.1
 #
 # Message sent to the player when they type the /harvest help command.
 # Requires permission: harvester.help
@@ -154,6 +154,8 @@ sell:
 #
 
 #
+# Message sent to the player when they start autoselling. Set this to nothing to
+# remove the message. No permission required
 start-selling:
   - "&7 "
   - "&f&lHarvesterTools:"

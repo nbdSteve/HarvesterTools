@@ -214,6 +214,12 @@ public class BlockBreak implements Listener {
         }
     }
 
+    /**
+     * Void method to add the player to the harvesting hashmap and send a delayed message
+     *
+     * @param player the player generating
+     * @param price  the sell price for each block broken
+     */
     private void updateCooldown(Player player, double price) {
         //Deposit the money into the players account.
         econ.depositPlayer(player, price);
@@ -227,29 +233,49 @@ public class BlockBreak implements Listener {
             //Set the variable to null so it can be used again
             playerMessageTask = null;
         } else {
+            /*
+            If they are not in the map then they have just started harvesting, send them this
+            message to alert.
+             */
             for (String m : lpf.getMessages().getStringList("start-selling")) {
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&', m).replace
                         ("%price%", String.valueOf(price)));
             }
         }
+        //Add the player to the hashmap with the delay cooldown
         playersBreaking.put(player.getUniqueId(),
                 System.currentTimeMillis() + (lpf.getConfig().getInt("message-delay") * 10));
-        //Check to see if the player has finished breaking blocks.
+        //Send the delayed message call
         delayedMessage(player, price);
     }
 
+    /**
+     * Send the price message to a player after the specified delay
+     *
+     * @param player the player to send the message to
+     * @param price  the price of each bucket
+     */
     private void delayedMessage(Player player, double price) {
+        //Set our class variable to this
         playerMessageTask = new BukkitRunnable() {
             @Override
             public void run() {
+                //Check to make sure the player is in the map
                 if (playersBreaking.containsKey(player.getUniqueId())) {
+                    /*
+                    See if they have stopped harvesting by checking cooldown, if they are still
+                    going then their cooldown will be > 0.
+                     */
                     if (playersBreaking.get(player.getUniqueId()) - System.currentTimeMillis() <= 0) {
+                        //Send the message
                         for (String m : lpf.getMessages().getStringList("sell")) {
                             player.sendMessage(ChatColor.translateAlternateColorCodes('&', m).replace
                                     ("%price%", String.valueOf(totalDeposit)).replace
                                     ("%blocksHarvested%", String.valueOf((int) (totalDeposit / price))));
                         }
+                        //Reset the class variable for later use
                         resetTotalDeposit();
+                        //Remove them from the hashmap
                         playersBreaking.remove(player.getUniqueId());
                     }
                 }
@@ -257,6 +283,18 @@ public class BlockBreak implements Listener {
         }.runTaskLater(pl, lpf.getConfig().getInt("message-delay"));
     }
 
+    /**
+     * Can't reference the variable in a runnable, therefore make a method to reset it.
+     */
+    private void resetTotalDeposit() {
+        this.totalDeposit = 0;
+    }
+
+    /**
+     *
+     * @param player
+     * @return
+     */
     private boolean inventorySpace(Player player) {
         if (player.getInventory().firstEmpty() == -1) {
             for (String m : lpf.getMessages().getStringList("inventory-full-harvest")) {
@@ -265,9 +303,5 @@ public class BlockBreak implements Listener {
             return false;
         }
         return true;
-    }
-
-    private void resetTotalDeposit() {
-        this.totalDeposit = 0;
     }
 }
