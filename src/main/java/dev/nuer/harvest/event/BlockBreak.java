@@ -102,7 +102,8 @@ public class BlockBreak implements Listener {
                 //Figure out which plugins are being used and what to support
                 if (Bukkit.getPluginManager().getPlugin("WorldGuard") != null) {
                     wg = true;
-                    if (!WorldGuard.allowsBreak(e.getBlock().getLocation())) {
+                    if (!WorldGuard.allowsBreak(e.getBlock().getX(), e.getBlock().getY(),
+                            e.getBlock().getZ(), p)) {
                         e.setCancelled(true);
                         return;
                     }
@@ -142,7 +143,8 @@ public class BlockBreak implements Listener {
                         //Loop for all of the blocks and sell / harvest them, because we know they are sugar cane
                         for (int i = y; i <= height; height--) {
                             Block check = p.getWorld().getBlockAt(x, height, z);
-                            if (wg && !WorldGuard.allowsBreak(check.getLocation())) {
+                            if (wg && !WorldGuard.allowsBreak(check.getX(), check.getY(),
+                                    check.getZ(), p)) {
                                 //Do nothing just return to the start of the loop
                             } else if (fac && !Factions.canBreakBlock(p, check)) {
                                 //Do nothing just return to the start of the loop
@@ -172,7 +174,8 @@ public class BlockBreak implements Listener {
                         //Loop for all of the blocks and sell / harvest them, because we know they are sugar cane
                         for (int i = y; i <= height; height--) {
                             Block check = p.getWorld().getBlockAt(x, height, z);
-                            if (wg && !WorldGuard.allowsBreak(check.getLocation())) {
+                            if (wg && !WorldGuard.allowsBreak(check.getX(), check.getY(),
+                                    check.getZ(), p)) {
                                 //Do nothing just return to the start of the loop
                             } else if (fac && !Factions.canBreakBlock(p, check)) {
                                 //Do nothing just return to the start of the loop

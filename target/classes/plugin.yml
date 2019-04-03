@@ -1,5 +1,5 @@
 name: HarvesterTools
-version: 1.2.2
+version: 1.2.2-[MC-1.13+]
 main: dev.nuer.harvest.HarvesterTools
 author: Nuer
 commands:
