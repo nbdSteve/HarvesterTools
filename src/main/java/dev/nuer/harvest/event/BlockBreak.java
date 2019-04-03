@@ -1,8 +1,8 @@
 package dev.nuer.harvest.event;
 
+import dev.nuer.harvest.HarvesterTools;
 import dev.nuer.harvest.exception.InvalidLevelException;
 import dev.nuer.harvest.file.CollateBlocks;
-import dev.nuer.harvest.HarvesterTools;
 import dev.nuer.harvest.file.LoadProvidedFiles;
 import dev.nuer.harvest.support.Factions;
 import dev.nuer.harvest.support.MassiveCore;
@@ -291,9 +291,10 @@ public class BlockBreak implements Listener {
     }
 
     /**
+     * Method that checks to see if the player has room in their inventory.
      *
-     * @param player
-     * @return
+     * @param player the player check
+     * @return boolean
      */
     private boolean inventorySpace(Player player) {
         if (player.getInventory().firstEmpty() == -1) {
